@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<fx:root type="VBox"
+         fx:controller="hk.ust.comp3021.gui.component.board.GameBoardController"
+         xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+    <GridPane fx:id="map"/>
+    <Label fx:id="undoQuota"/>
+</fx:root>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import hk.ust.comp3021.gui.component.board.GameBoard?>
+<?import hk.ust.comp3021.gui.component.control.ControlPanel?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<GridPane
+        prefHeight="400.0"
+        prefWidth="600.0"
+        xmlns="http://javafx.com/javafx/18"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:id="gamePane"
+        fx:controller="hk.ust.comp3021.gui.scene.game.GameSceneController">
+    <padding>
+        <Insets left="10" right="10" bottom="10" top="10"/>
+    </padding>
+    <GameBoard
+            fx:id="gameBoard"
+            GridPane.vgrow="ALWAYS"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="0"
+    />
+    <Button prefWidth="80"
+            GridPane.rowIndex="1"
+            GridPane.columnIndex="0"
+            onAction="#onExit"
+            text="Exit"
+    />
+    <ControlPanel
+            prefWidth="500"
+            fx:id="controlPanel"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="0"
+            GridPane.rowSpan="2"
+    >
+        <GridPane.margin>
+            <Insets left="20"/>
+        </GridPane.margin>
+    </ControlPanel>
+</GridPane>

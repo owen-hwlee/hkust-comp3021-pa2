@@ -1,0 +1,12 @@
+.clickable-block {
+    -fx-background-radius: 2;
+}
+
+.clickable-block:hover {
+    -fx-background-color: lightgrey;
+    -fx-cursor: pointer;
+}
+
+.clickable-block:pressed {
+    -fx-background-color: white;
+}

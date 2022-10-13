@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="StackPane"
+         fx:controller="hk.ust.comp3021.gui.component.board.CellController">
+    <ImageView fx:id="image"
+               fitHeight="30"
+               fitWidth="30"/>
+    <Label fx:id="mark"
+           textFill="green"/>
+</fx:root>

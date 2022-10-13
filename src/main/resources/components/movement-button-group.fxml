@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<fx:root type="GridPane"
+         fx:controller="hk.ust.comp3021.gui.component.control.MovementButtonGroupController"
+         fx:id="playerControl"
+         xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         stylesheets="components/movement-button-group.css"
+>
+    <Button text="↑"
+            GridPane.rowIndex="0"
+            GridPane.columnIndex="1"
+            GridPane.halignment="CENTER"
+            GridPane.valignment="CENTER"
+            styleClass="arrow-button"
+            onAction="#moveUp"/>
+    <Button text="←"
+            GridPane.rowIndex="1"
+            GridPane.columnIndex="0"
+            GridPane.halignment="CENTER"
+            GridPane.valignment="CENTER"
+            styleClass="arrow-button"
+            onAction="#moveLeft"/>
+    <ImageView fx:id="playerImage"
+               fitHeight="40"
+               fitWidth="40"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="1"
+               GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER"
+    />
+    <Button text="→"
+            GridPane.rowIndex="1"
+            GridPane.columnIndex="2"
+            GridPane.halignment="CENTER"
+            GridPane.valignment="CENTER"
+            styleClass="arrow-button"
+            onAction="#moveRight"/>
+    <Button text="↓"
+            GridPane.rowIndex="2"
+            GridPane.columnIndex="1"
+            GridPane.halignment="CENTER"
+            GridPane.valignment="CENTER"
+            styleClass="arrow-button"
+            onAction="#moveDown"/>
+</fx:root>

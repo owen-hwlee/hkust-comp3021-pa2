@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<fx:root xmlns="http://javafx.com/javafx"
+         type="ListView"
+         fx:id="list"
+         fx:controller="hk.ust.comp3021.gui.component.maplist.MapListController"
+         xmlns:fx="http://javafx.com/fxml"
+         prefHeight="400.0"
+         prefWidth="600.0">
+</fx:root>
