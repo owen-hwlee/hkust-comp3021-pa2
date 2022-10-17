@@ -30,6 +30,8 @@ public class CellController implements Initializable {
      */
     public void markAtDestination() {
         // TODO
+        // To Be Confirmed
+        mark.setDisable(false);
     }
 
     /**
@@ -38,6 +40,7 @@ public class CellController implements Initializable {
      * @param url The URL to the image.
      */
     public void setImage(@NotNull URL url) {
-        // TODO
+        // DONE
+        this.image = new ImageView(url.getPath());
     }
 }
