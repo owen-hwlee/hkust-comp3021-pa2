@@ -3,11 +3,9 @@ package hk.ust.comp3021.gui.component.maplist;
 import hk.ust.comp3021.game.GameMap;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.stream.Collectors;
