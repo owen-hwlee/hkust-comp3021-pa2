@@ -3,6 +3,7 @@ package hk.ust.comp3021.gui.component.board;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +42,6 @@ public class CellController implements Initializable {
      */
     public void setImage(@NotNull URL url) {
         // DONE
-        this.image = new ImageView(url.getPath());
+        this.image.setImage(new Image(url.getPath()));
     }
 }
