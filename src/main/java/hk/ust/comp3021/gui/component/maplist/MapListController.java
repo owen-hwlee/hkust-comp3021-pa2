@@ -27,12 +27,8 @@ public class MapListController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO
-
-//        ObservableList<MapModel> maps = FXCollections.observableArrayList(this.list.getItems());
-//        this.list.setItems(maps);
-
+        // DONE
         // Set item in MapList to be MapListCell
-        this.list.setCellFactory(list -> new MapListCell());
+        this.list.setCellFactory(param -> new MapListCell());
     }
 }
