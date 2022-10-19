@@ -49,8 +49,9 @@ public class App extends Application {
     public void onOpenMap(MapEvent event) {
         // DONE
         this.primaryStage.hide();
-        Path mapPath = event.getModel().file().toAbsolutePath();
+        Path mapPath = null;
         try {
+            mapPath = Path.of(event.getModel().file().toFile().getCanonicalPath());
             this.primaryStage.setScene(new GameScene(new GameState(event.getModel().gameMap())));
             this.primaryStage.show();
         } catch (IOException e) {
