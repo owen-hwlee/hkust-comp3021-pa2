@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
-import java.util.function.Function;
 
 /**
  * Control logic for {@link  StartScene}.
@@ -192,7 +191,7 @@ public class StartController implements Initializable {
 
                 // Sort maps by timestamp of loading each map
                 this.mapList.getItems().sort(Comparator
-                        .comparing((Function<MapModel, Date>) map -> map.loadAt())
+                        .comparing(MapModel::loadAt)
                         .reversed());
 
                 this.mapList.refresh();     // TBC
