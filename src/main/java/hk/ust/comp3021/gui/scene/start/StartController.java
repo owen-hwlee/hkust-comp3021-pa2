@@ -157,7 +157,7 @@ public class StartController implements Initializable {
     }
 
     // Helper function: validate and add maps to mapList
-    // Assume function argument is array of absolute paths
+    // Assume function argument is array of File references
     // Used in initialize and after loadMap and dragDropped
     private void addMapsToMapList(File[] mapFiles) {
         for (final File mapFile: mapFiles) {
