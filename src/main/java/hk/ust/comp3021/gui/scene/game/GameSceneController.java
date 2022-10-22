@@ -64,6 +64,8 @@ public class GameSceneController implements Initializable {
      */
     @FXML
     public void onExit(ActionEvent event) {
-        // TODO
+        // DONE
+        this.gamePane.fireEvent(new ExitEvent());
+        event.consume();
     }
 }
