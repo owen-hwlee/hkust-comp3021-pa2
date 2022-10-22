@@ -35,6 +35,12 @@ public class App extends Application {
         this.primaryStage.setTitle("Sokoban Game - COMP3021 2022Fall");
 
         // DONE
+
+        // Add event handlers for opening game map and exiting game
+        this.primaryStage.addEventHandler(MapEvent.OPEN_MAP_EVENT_TYPE, this::onOpenMap);
+        this.primaryStage.addEventHandler(ExitEvent.EVENT_TYPE, this::onExitGame);
+
+        // Set primaryStage to StartScene and show
         this.startScene = new StartScene();
         this.primaryStage.setScene(this.startScene);
         this.primaryStage.show();
