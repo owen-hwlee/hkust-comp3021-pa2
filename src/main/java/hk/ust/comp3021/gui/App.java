@@ -64,6 +64,8 @@ public class App extends Application {
             e.printStackTrace();
             Message.error("Failed to open game map.", "Failed to open game map at %s".formatted(mapPath));
         }
+
+        event.consume();
     }
 
     /**
@@ -77,5 +79,7 @@ public class App extends Application {
         this.primaryStage.hide();
         this.primaryStage.setScene(this.startScene);
         this.primaryStage.show();
+
+        event.consume();
     }
 }
