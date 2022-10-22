@@ -4,11 +4,13 @@ import hk.ust.comp3021.gui.component.maplist.MapEvent;
 import hk.ust.comp3021.gui.component.maplist.MapList;
 import hk.ust.comp3021.gui.component.maplist.MapModel;
 import hk.ust.comp3021.gui.utils.Message;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -43,14 +45,22 @@ public class StartController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // DONE
 
-        // Disable buttons, default does not select any items
-        openButton.setDisable(true);
-        deleteButton.setDisable(true);
+        // Bind button enable / disable to whether or not cells are selected
+        this.openButton.disableProperty().bind(
+                Bindings.isNull(this.mapList.getSelectionModel().selectedItemProperty())
+        );
+        this.deleteButton.disableProperty().bind(
+                Bindings.isNull(this.mapList.getSelectionModel().selectedItemProperty())
+        );
 
         // Load built-in maps map00.map and map01.map to mapList
         try {
-            File map00 = new File(StartController.class.getClassLoader().getResource("map00.map").toURI());
-            File map01 = new File(StartController.class.getClassLoader().getResource("map01.map").toURI());
+            File map00 = new File(Objects.requireNonNull(
+                    StartController.class.getClassLoader().getResource("map00.map")
+            ).toURI());
+            File map01 = new File(Objects.requireNonNull(
+                    StartController.class.getClassLoader().getResource("map01.map")
+            ).toURI());
 
             File[] builtInMapFiles = { map00, map01 };
             addMapsToMapList(builtInMapFiles);
@@ -74,8 +84,7 @@ public class StartController implements Initializable {
     private void onLoadMapBtnClicked(ActionEvent event) {
         // DONE
         // Display file chooser
-        FileChooser fileChooser = new FileChooser();
-        List<File> fileList = fileChooser.showOpenMultipleDialog(null);
+        List<File> fileList = (new FileChooser()).showOpenMultipleDialog(null);
         if (Objects.isNull(fileList)) {
             return;
         }
@@ -83,6 +92,8 @@ public class StartController implements Initializable {
         fileList.toArray(mapFiles);
         // Validate and add maps to mapList
         addMapsToMapList(mapFiles);
+
+        event.consume();
     }
 
     /**
@@ -91,7 +102,7 @@ public class StartController implements Initializable {
      */
     @FXML
     public void onDeleteMapBtnClicked() {
-        // TODO
+        // DONE
         this.mapList.getItems().remove(this.mapList.getFocusModel().getFocusedIndex());
     }
 
@@ -102,11 +113,11 @@ public class StartController implements Initializable {
      */
     @FXML
     public void onOpenMapBtnClicked() {
-        // TODO
+        // DONE
         MapModel focusMapModel = this.mapList.getFocusModel().getFocusedItem();
 
-//        MapEvent mapEvent = new MapEvent(, focusMapModel);
-//        MapEvent.fireEvent(, mapEvent);
+        MapEvent mapEvent = new MapEvent(MapEvent.OPEN_MAP_EVENT_TYPE, focusMapModel);
+        this.openButton.fireEvent(mapEvent);
     }
 
     /**
@@ -117,14 +128,11 @@ public class StartController implements Initializable {
      */
     @FXML
     public void onDragOver(DragEvent event) {
-        // TODO
-//        if (event.getGestureSource() != target &&
-//                event.getDragboard().hasString()) {
-//            /* allow for both copying and moving, whatever user chooses */
-//            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-//        }
-//
-//        event.consume();
+        // DONE
+        if (event.getDragboard().hasFiles()) {
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+        event.consume();
     }
 
     /**
@@ -139,21 +147,17 @@ public class StartController implements Initializable {
      */
     @FXML
     public void onDragDropped(DragEvent dragEvent) {
-        // TODO
-//        Dragboard db = event.getDragboard();
-//        boolean success = false;
-        File[] mapFiles = new File[0];
-        // TODO: Put down absolute paths
-//        if (db.hasString()) {
-//            target.setText(db.getString());
-//            success = true;
-//        }
+        // DONE
+        // Obtain files from drag
+        File[] mapFiles = new File[dragEvent.getDragboard().getFiles().size()];
+        dragEvent.getDragboard().getFiles().toArray(mapFiles);
+
+        // Process map files
         addMapsToMapList(mapFiles);
-//        /* let the source know whether the string was successfully
-//         * transferred and used */
-//        event.setDropCompleted(success);
-//
-//        event.consume();
+
+        // Complete event
+        dragEvent.setDropCompleted(true);
+        dragEvent.consume();
     }
 
     // Helper function: validate and add maps to mapList
@@ -186,20 +190,21 @@ public class StartController implements Initializable {
                 URL url = new URL("file", "", mapFile.getCanonicalPath());
                 MapModel mapModel = MapModel.load(url);
 
-                // Add maps to mapList
-                this.mapList.getItems().add(mapModel);
+                // Add maps to front of mapList
+                this.mapList.getItems().add(0, mapModel);
 
-                // Sort maps by timestamp of loading each map
-                this.mapList.getItems().sort(Comparator
-                        .comparing(MapModel::loadAt)
-                        .reversed());
-
-                this.mapList.refresh();     // TBC
+//                // No longer need to sort maps by timestamp of loading each map
+//                this.mapList.getItems().sort(Comparator
+//                        .comparing(MapModel::loadAt)
+//                        .reversed());
 
             } catch (IOException e) {
                 // Display error message
                 e.printStackTrace();
                 Message.error("Failed to access .map file.", "Failed to load map at %s".formatted(mapFile));
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                Message.error("Invalid map.", "Failed to parse map at %s".formatted(mapFile));
             }
         }
     }
