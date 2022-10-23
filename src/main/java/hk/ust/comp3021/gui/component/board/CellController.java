@@ -23,13 +23,12 @@ public class CellController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO
+        // DONE
 
         // Configure hidden green tick for label
-        this.mark.toBack();
+        this.mark.setVisible(false);
         this.mark.setText("✓");
         this.mark.setTextFill(Paint.valueOf("#00FF00"));
-        this.mark.setDisable(true);
     }
 
     /**
@@ -38,8 +37,7 @@ public class CellController implements Initializable {
      */
     public void markAtDestination() {
         // DONE
-        mark.toFront();
-        mark.setDisable(false);
+        mark.setVisible(true);
     }
 
     /**
