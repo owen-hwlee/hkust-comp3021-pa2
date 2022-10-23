@@ -43,6 +43,9 @@ public class GameBoardController implements RenderingEngine, Initializable {
     public void render(@NotNull GameState state) {
         // DONE
 
+        // Clear all map cells for re-render
+        Platform.runLater(() -> this.map.getChildren().clear());
+
         // Add undoQuota to board
         this.undoQuota.setText(
                 "Undo quota: " +
@@ -51,7 +54,6 @@ public class GameBoardController implements RenderingEngine, Initializable {
 
         // Re-render the map
         try {
-            this.map.getChildren().clear();
             for (int rowIndex = 0; rowIndex < state.getMapMaxHeight(); ++rowIndex) {
                 for (int columnIndex = 0; columnIndex < state.getMapMaxWidth(); ++columnIndex) {
                     Cell cell = new Cell();
@@ -84,7 +86,7 @@ public class GameBoardController implements RenderingEngine, Initializable {
                 }
             }
         } catch (IOException e) {
-            Message.error("Render error", "Unable to render game board cells.");
+            Platform.runLater(() -> Message.error("Render error", "Unable to render game board cells."));
         }
     }
 
