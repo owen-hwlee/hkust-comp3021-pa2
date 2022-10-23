@@ -61,6 +61,8 @@ Dragging files to the start scene should work the same as clicking Load Map butt
     - [x] `App::onOpenMap` for `MapEvent`
     - [x] `App::onExitGame` for `ExitEvent`
 - [ ] Game stage
+  - [ ] Exiting game
+    - [ ] (TBC) What to do if user directly clicks close instead of Exit button ?
 
 ## Unresolved issues
 
@@ -73,5 +75,7 @@ Dragging files to the start scene should work the same as clicking Load Map butt
   - `MapListCell::updateItem` is called after `MapListItemController::initialize`
   - `this.mapModelProperty.value` had not been set, so has `null` value
   - [x] Solution: add `StringBinding` to `textProperty` of `@FXML` Labels
+- [x] `GameBoardController::render`: performing `this.map.add()` repeatedly to add all `Cell()`s will result in Threading issue, causing error
+  - [x] Solution: use `Platform.runLater()`
 
 ## This is the end of this todo list.
