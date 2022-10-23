@@ -26,28 +26,28 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
     - [x] `Delete Map` button should be enabled when a map is selected in the map list.
     - [x] Clicking `Delete Map` button should delete the selected map from the map list.
   - [x] Items in the map list should be persistent when switching from start scene to game scene and back to start scene.
-- [ ] Game Scene
-  - [ ] Exit game
+- [x] Game Scene
+  - [x] Exit game
     - [x] Clicking the `Exit` button should switch back to the start scene.
-    - [ ] Exiting the game should discard any progress of current game, i.e., start game with the same map again should start a new game.
-  - [ ] Game map
+    - [x] Exiting the game should discard any progress of current game, i.e., start game with the same map again should start a new game.
+  - [x] Game map
     - [x] The game map should display the same as what is expected, i.e., each position should have the correct entity ( or empty).
     - [x] Each player and its corresponding boxes should have the same color.
-    - [ ] When a box is moved to a destination place, a green tick `✓` should be displayed on top of the box.
-    - [ ] When a box is moved out of a destination place, the green tick `✓` should be removed.
+    - [x] When a box is moved to a destination place, a green tick `✓` should be displayed on top of the box.
+    - [x] When a box is moved out of a destination place, the green tick `✓` should be removed.
     - [x] Below the game map, there should be a text area displaying the current undo quota left.
-    - [ ] The undo quota should be updated when an undo action is performed.
+    - [x] The undo quota should be updated when an undo action is performed.
     - [x] The undo quota text should show `unlimited` if the undo quota is unlimited (-1 in the game map file).
-  - [ ] Player Control panel
+  - [x] Player Control panel
     - [x] Each player should have its own control panel on the right of the game scene (4 players at most).
     - [x] The control panel should display the player's picture in the middle, and buttons to move the player in the four directions.
     - [x] The number of control panels should be the same as the number of players in the game.
-    - [ ] Each control panel should only control the corresponding player.
-  - [ ] Undo
-    - [ ] Clicking the `Undo` button should revert to the previous checkpoint (same as PA1).
-  - [ ] Messages
-    - [ ] When a player performs an invalid move, there should be an error message displayed.
-    - [ ] When the game wins, there should be a message displayed.
+    - [x] Each control panel should only control the corresponding player.
+  - [x] Undo
+    - [x] Clicking the `Undo` button should revert to the previous checkpoint (same as PA1).
+  - [x] Messages
+    - [x] When a player performs an invalid move, there should be an error message displayed.
+    - [x] When the game wins, there should be a message displayed.
 
 ## Non-specified implementations
 
