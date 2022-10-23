@@ -79,7 +79,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - `MapListCell::updateItem` is called after `MapListItemController::initialize`
   - `this.mapModelProperty.value` had not been set, so has `null` value
   - [x] Solution: add `StringBinding` to `textProperty` of `@FXML` Labels
-- [x] `GameBoardController::render`: performing `this.map.add()` repeatedly to add all `Cell()`s will result in Threading issue, causing error
-  - [x] Solution: use `Platform.runLater()`
+- [x] `GameBoardController::render`: performing `this.map.add()` repeatedly to add all `Cell()`s will result in Threading issue, causing `Not on FX Application Thread` error
+  - [x] Solution: use `Platform.runLater()` to wrap the `.add(Cell)` operation
 
 ## This is the end of this todo list.
