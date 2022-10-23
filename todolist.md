@@ -67,6 +67,9 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
     - [ ] (TBC) What to do if user directly closes window instead of `Exit` button ?
   - [x] GameBoard
     - [x] Positions outside wall can have `null` value and no entity, and those boxes should not show green tick
+    - [x] All rendering should be wrapped in `Platform.runLater()` to avoid Thread error
+  - [ ] GameControls
+    - [ ] (TBC) Need to handle exception if map has over 4 players?
 
 ## Unresolved issues
 
@@ -81,5 +84,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Solution: add `StringBinding` to `textProperty` of `@FXML` Labels
 - [x] `GameBoardController::render`: performing `this.map.add()` repeatedly to add all `Cell()`s will result in Threading issue, causing `Not on FX Application Thread` error
   - [x] Solution: use `Platform.runLater()` to wrap the `.add(Cell)` operation
+- [ ] `CheckStyle` returns style error with `MapEvent.OPEN_MAP_EVENT_TYPE`
+  - [ ] (TBC) Solution: add `final` keyword
 
 ## This is the end of this todo list.
