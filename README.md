@@ -75,7 +75,7 @@ The GUI game has two scenes: the `start scene` and the `game scene`.
 The start scene serves as a menu to select game maps to play.
 Users can load a map from file system by clicking `Load Map` button, and the loaded map will be displayed in the map
 list.
-The map in the list can be deleted by clicking the `x` button on the right of each map item.
+The map in the list can be deleted by clicking the `Delete Map` button.
 
 On clicking one map in the list, the GUI view will switch to the game scene, where the user can move players and win the
 game.
