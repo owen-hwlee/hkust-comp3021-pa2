@@ -47,10 +47,10 @@ public class GameBoardController implements RenderingEngine, Initializable {
         Platform.runLater(() -> this.map.getChildren().clear());
 
         // Add undoQuota to board
-        this.undoQuota.setText(
+        Platform.runLater(() -> this.undoQuota.setText(
                 "Undo quota: " +
                         (state.getUndoQuota().isPresent() ? state.getUndoQuota().get().toString() : "unlimited")
-        );
+        ));
 
         // Re-render the map
         try {
