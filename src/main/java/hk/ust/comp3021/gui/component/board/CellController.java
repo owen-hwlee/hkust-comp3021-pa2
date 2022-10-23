@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
@@ -23,6 +24,12 @@ public class CellController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO
+
+        // Configure hidden green tick for label
+        this.mark.toBack();
+        this.mark.setText("✓");
+        this.mark.setTextFill(Paint.valueOf("#00FF00"));
+        this.mark.setDisable(true);
     }
 
     /**
@@ -30,8 +37,8 @@ public class CellController implements Initializable {
      * Should be called when the cell is one of the  destinations and there is a box.
      */
     public void markAtDestination() {
-        // TODO
-        // To Be Confirmed
+        // DONE
+        mark.toFront();
         mark.setDisable(false);
     }
 
@@ -42,6 +49,6 @@ public class CellController implements Initializable {
      */
     public void setImage(@NotNull URL url) {
         // DONE
-        this.image.setImage(new Image(url.getPath()));
+        this.image.setImage(new Image(url.toExternalForm()));
     }
 }
