@@ -1,5 +1,6 @@
 package hk.ust.comp3021.gui.component.control;
 
+import hk.ust.comp3021.actions.Move;
 import hk.ust.comp3021.entities.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,31 +39,43 @@ public class MovementButtonGroupController implements Initializable {
      */
     public void setPlayerImage(URL url) {
         // DONE
-        this.playerImage.setImage(new Image(url.getPath()));
+        this.playerImage.setImage(new Image(url.toExternalForm()));
     }
 
     @FXML
     private void moveUp() {
-        // TODO
+        // DONE
+        this.playerControl.fireEvent(
+                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Up(this.player.getId()))
+        );
     }
 
     @FXML
     private void moveDown() {
-        // TODO
+        // DONE
+        this.playerControl.fireEvent(
+                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Down(this.player.getId()))
+        );
     }
 
     @FXML
     private void moveLeft() {
-        // TODO
+        // DONE
+        this.playerControl.fireEvent(
+                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Left(this.player.getId()))
+        );
     }
 
     @FXML
     private void moveRight() {
-        // TODO
+        // DONE
+        this.playerControl.fireEvent(
+                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Right(this.player.getId()))
+        );
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO
+        // DONE
     }
 }

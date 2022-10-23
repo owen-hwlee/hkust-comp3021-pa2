@@ -1,16 +1,19 @@
 package hk.ust.comp3021.gui.component.control;
 
 import hk.ust.comp3021.actions.Action;
+import hk.ust.comp3021.actions.Undo;
 import hk.ust.comp3021.entities.Player;
 import hk.ust.comp3021.game.InputEngine;
-import hk.ust.comp3021.utils.NotImplementedException;
+import hk.ust.comp3021.gui.utils.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -22,6 +25,8 @@ public class ControlPanelController implements Initializable, InputEngine {
     @FXML
     private FlowPane playerControls;
 
+    private Action currentAction;
+
     /**
      * Fetch the next action made by users.
      * All the actions performed by users should be cached in this class and returned by this method.
@@ -30,8 +35,21 @@ public class ControlPanelController implements Initializable, InputEngine {
      */
     @Override
     public @NotNull Action fetchAction() {
-        // TODO
-        throw new NotImplementedException();
+        // DONE
+        // Will only return Move.Left, Move.Right, Move.Up, Move.Down, Undo
+
+        // Blocking wait
+        while (Objects.isNull(this.currentAction)) {
+            // FIXME: several concurrency issues
+            //  Find method to do non-blocking wait
+            //  While-loop does not terminate even after GameScene ends
+            System.out.println("Waiting ...");
+        }
+
+        // Provide Action for game to process and clear cached Action
+        Action action = this.currentAction;
+        this.currentAction = null;
+        return action;
     }
 
     /**
@@ -44,7 +62,12 @@ public class ControlPanelController implements Initializable, InputEngine {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO
+        // DONE
+        // Add event handler for MoveEvent
+        this.playerControls.addEventHandler(MoveEvent.PLAYER_MOVE_EVENT_TYPE, (moveEvent -> {
+            this.currentAction = moveEvent.getMove();
+            moveEvent.consume();
+        }));
     }
 
     /**
@@ -54,7 +77,11 @@ public class ControlPanelController implements Initializable, InputEngine {
      * @param event Event data related to clicking the button.
      */
     public void onUndo(ActionEvent event) {
-        // TODO
+        // DONE
+
+        this.currentAction = new Undo(-1);
+
+        event.consume();
     }
 
     /**
@@ -65,7 +92,17 @@ public class ControlPanelController implements Initializable, InputEngine {
      * @param playerImageUrl The URL to the profile image of the player
      */
     public void addPlayer(Player player, URL playerImageUrl) {
-        // TODO
+        // DONE
+        try {
+            MovementButtonGroup movementButtonGroup = new MovementButtonGroup();
+            movementButtonGroup.getController().setPlayer(player);
+            movementButtonGroup.getController().setPlayerImage(playerImageUrl);
+
+            this.playerControls.getChildren().add(movementButtonGroup);
+        } catch (IOException e) {
+            Message.error("Failed to add player controls",
+                    "Failed to add player control button group for player %d".formatted(player.getId()));
+        }
     }
 
 }
