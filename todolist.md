@@ -74,6 +74,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
 
 ## Unresolved issues
 
+- [x] `map13.map` is created, with 5 players and 10 boxes, should not be allowed
 - [x] `MapModel::load`: Path to URL single slash problem (Windows-specific)
   - `MapModel::load` uses `Path.of(url.getPath())`
   - If we previously use `.toURI().toURL()` methods, the returned `URL` object begins with `file/C:/...` instead of `file///C:/...`
