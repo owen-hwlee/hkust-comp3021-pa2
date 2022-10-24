@@ -55,21 +55,22 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Initial
     - [x] Both `Open Map` and `Delete Map` buttons are disabled
     - [x] No games are selected
-  - [ ] MapList
-    - [ ] (TBC) Sorted by timestamp in ascending or descending order ?
+  - [x] MapList
+    - [x] Sort by timestamp, either ascending or descending is fine
   - [x] MapListItem
     - [x] Should display name, file path, load time properly
   - [x] Set up event handlers in `App::start`
     - [x] `App::onOpenMap` for `MapEvent`
     - [x] `App::onExitGame` for `ExitEvent`
 - [ ] Game stage
-  - [ ] Exiting game
-    - [ ] (TBC) What to do if user directly closes window instead of `Exit` button ?
+  - [x] Exiting game
+    - [x] What to do if user directly closes window instead of `Exit` button? Ans: anything, not specified in requirements
   - [x] GameBoard
     - [x] Positions outside wall can have `null` value and no entity, and those boxes should not show green tick
     - [x] All rendering should be wrapped in `Platform.runLater()` to avoid Thread error
   - [ ] GameControls
     - [ ] (TBC) Need to handle exception if map has over 4 players?
+    - [ ] (TBC) Only have 4 panels but can have more than 4 players on map?
 
 ## Unresolved issues
 
