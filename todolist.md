@@ -62,15 +62,14 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Set up event handlers in `App::start`
     - [x] `App::onOpenMap` for `MapEvent`
     - [x] `App::onExitGame` for `ExitEvent`
-- [ ] Game stage
+- [x] Game stage
   - [x] Exiting game
     - [x] What to do if user directly closes window instead of `Exit` button? Ans: anything, not specified in requirements
   - [x] GameBoard
     - [x] Positions outside wall can have `null` value and no entity, and those boxes should not show green tick
     - [x] All rendering should be wrapped in `Platform.runLater()` to avoid Thread error
-  - [ ] GameControls
-    - [ ] (TBC) Need to handle exception if map has over 4 players?
-    - [ ] (TBC) Only have 4 panels but can have more than 4 players on map?
+  - [x] GameControls
+    - [x] If map has over 4 players, display error message when users are trying to load a map with more than four players in the `StartScene` (verified by TAs in Discussion #116)
 
 ## Unresolved issues
 
@@ -88,6 +87,6 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Solution: use `Platform.runLater()` to wrap the `.add(Cell)` operation
 - [x] `CheckStyle` returns style error with `MapEvent.OPEN_MAP_EVENT_TYPE`
   - [x] Solution: TA updated skeleton code to add `final` keyword
-- [ ] `ControlPanelController`: `.fetchAction()` needs a non-blocking wait method, preferrably `Thread` related, so that it terminates after `GameScene` is terminated
+- [ ] [Optional] `ControlPanelController`: `.fetchAction()` needs a non-blocking wait method, preferrably `Thread` related, so that it terminates after `GameScene` is terminated
 
 ## This is the end of this todo list.

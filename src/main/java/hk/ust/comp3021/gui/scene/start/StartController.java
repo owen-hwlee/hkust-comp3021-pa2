@@ -190,6 +190,12 @@ public class StartController implements Initializable {
                 URL url = new URL("file", "", mapFile.getCanonicalPath());
                 MapModel mapModel = MapModel.load(url);
 
+                // Validate map should have at most 4 players
+                if (mapModel.gameMap().getPlayerIds().size() > 4) {
+                    Message.error("Invalid map.", "Map file contains more than 4 players. Invalid file: %s".formatted(mapFile));
+                    continue;
+                }
+
                 // Add maps to front of mapList
                 this.mapList.getItems().add(0, mapModel);
 
