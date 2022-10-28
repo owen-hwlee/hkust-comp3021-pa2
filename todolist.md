@@ -58,7 +58,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] MapList
     - [x] Sort by timestamp, either ascending or descending is fine
   - [x] MapListItem
-    - [x] Should display name, file path, load time properly
+    - [x] Should display name, file path, load time properly in their respective `@FXML` components
   - [x] Set up event handlers in `App::start`
     - [x] `App::onOpenMap` for `MapEvent`
     - [x] `App::onExitGame` for `ExitEvent`
