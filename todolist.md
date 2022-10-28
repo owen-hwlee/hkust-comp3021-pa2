@@ -62,6 +62,9 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Set up event handlers in `App::start`
     - [x] `App::onOpenMap` for `MapEvent`
     - [x] `App::onExitGame` for `ExitEvent`
+  - [ ] Delete map
+    - [ ] After deleting map, the MapList should not have a selected item
+      - Observable by the `Open Map` and `Delete Map` buttons being disabled
 - [x] Game stage
   - [x] Exiting game
     - [x] What to do if user directly closes window instead of `Exit` button? Ans: anything, not specified in requirements
@@ -87,6 +90,16 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Solution: use `Platform.runLater()` to wrap the `.add(Cell)` operation
 - [x] `CheckStyle` returns style error with `MapEvent.OPEN_MAP_EVENT_TYPE`
   - [x] Solution: TA updated skeleton code to add `final` keyword
-- [ ] [Optional] `ControlPanelController`: `.fetchAction()` needs a non-blocking wait method, preferrably `Thread` related, so that it terminates after `GameScene` is terminated
+- [ ] [Optional] The JavaFX Application Thread `gameThreadLoop` was not properly handled, so the thread is not terminated even after exit, stuck at `.fetchAction()`
+  - [ ] Solution: see TA's remarks in Discussion #113
+- [x] [Optional] `ControlPanelController`: `.fetchAction()` needs a wait method without placing `System.out.println()` inside the while-loop of a busy wait
+  - Preferrably NOT `Thread` related, since threading is not needed for this programming assignment
+  - If possible, not use busy wait since it consumes CPU resource
+  - [x] Solution:
+    - [x] Solution 1: use `volatile` keyword in busy wait
+      - CheckStyle will issue an error for using an empty while-loop
+    - [ ] Solution 2: use Lock classes provided by Java
+    - [ ] Solution 3: use `synchronous`, `.notify()`, `.wait()`
+      - May result in `java.lang.IllegalMonitorStateException`: current thread is not owner
 
 ## This is the end of this todo list.
