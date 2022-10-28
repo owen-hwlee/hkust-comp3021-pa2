@@ -25,7 +25,7 @@ public class ControlPanelController implements Initializable, InputEngine {
     @FXML
     private FlowPane playerControls;
 
-    private Action currentAction;
+    private volatile Action currentAction;
 
     /**
      * Fetch the next action made by users.
@@ -38,12 +38,11 @@ public class ControlPanelController implements Initializable, InputEngine {
         // DONE
         // Will only return Move.Left, Move.Right, Move.Up, Move.Down, Undo
 
-        // Blocking wait
+        // Busy wait
+        // FIXME: several concurrency issues
+        //  Find method to do wait better than busy wait: temporarily solved by volatile keyword
+        //  While-loop does not terminate even after GameScene ends: see Discussion #113
         while (Objects.isNull(this.currentAction)) {
-            // FIXME: several concurrency issues
-            //  Find method to do non-blocking wait
-            //  While-loop does not terminate even after GameScene ends
-            System.out.println("Waiting ...");
         }
 
         // Provide Action for game to process and clear cached Action
