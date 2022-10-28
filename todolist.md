@@ -62,8 +62,8 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Set up event handlers in `App::start`
     - [x] `App::onOpenMap` for `MapEvent`
     - [x] `App::onExitGame` for `ExitEvent`
-  - [ ] Delete map
-    - [ ] After deleting map, the MapList should not have a selected item
+  - [x] Delete map
+    - [x] After deleting map, the MapList should not have a selected item
       - Observable by the `Open Map` and `Delete Map` buttons being disabled
 - [x] Game stage
   - [x] Exiting game
