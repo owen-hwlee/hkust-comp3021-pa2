@@ -72,7 +72,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
     - [x] Positions outside wall can have `null` value and no entity, and those boxes should not show green tick
     - [x] All rendering should be wrapped in `Platform.runLater()` to avoid Thread error
   - [x] GameControls
-    - [x] If map has over 4 players, display error message when users are trying to load a map with more than four players in the `StartScene` (verified by TAs in Discussion #116)
+    - [x] If map has over 4 players, display error message when user tries to load a map with more than four players in the `StartScene` (verified by TAs in Discussion #116)
 
 ## Unresolved issues
 
@@ -92,9 +92,10 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Solution: TA updated skeleton code to add `final` keyword
 - [ ] [Optional] The JavaFX Application Thread `gameThreadLoop` was not properly handled, so the thread is not terminated even after exit, stuck at `.fetchAction()`
   - [ ] Solution: see TA's remarks in Discussion #113
-- [x] [Optional] `ControlPanelController`: `.fetchAction()` needs a wait method without placing `System.out.println()` inside the while-loop of a busy wait
-  - Preferrably NOT `Thread` related, since threading is not needed for this programming assignment
-  - If possible, not use busy wait since it consumes CPU resource
+- [x] [Optional] `ControlPanelController`: using busy wait in `.fetchAction()` requires placing a time consuming operation such as `System.out.println()` inside the while-loop, otherwise `.fetchAction()` does not proceed
+  - Likely originated from different caching location for `this.currentAction` used in while-loop condition and event handler
+  - Preferrably NOT `Thread` related fix, since threading is not needed for this programming assignment
+  - If possible, not use busy wait since it consumes CPU resources
   - [x] Solution:
     - [x] Solution 1: use `volatile` keyword in busy wait
       - CheckStyle will issue an error for using an empty while-loop
