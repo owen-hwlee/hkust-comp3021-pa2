@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
@@ -44,6 +45,9 @@ public class StartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // DONE
+
+        // Ensure single selection for MapList
+        this.mapList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         // Bind button enable / disable to whether or not cells are selected
         this.openButton.disableProperty().bind(
@@ -103,7 +107,12 @@ public class StartController implements Initializable {
     @FXML
     public void onDeleteMapBtnClicked() {
         // DONE
+
+        // Delete map from MapList
         this.mapList.getItems().remove(this.mapList.getFocusModel().getFocusedIndex());
+
+        // Set no selected model in MapList
+        this.mapList.getSelectionModel().clearSelection();
     }
 
     /**
@@ -198,11 +207,6 @@ public class StartController implements Initializable {
 
                 // Add maps to front of mapList
                 this.mapList.getItems().add(0, mapModel);
-
-//                // No longer need to sort maps by timestamp of loading each map
-//                this.mapList.getItems().sort(Comparator
-//                        .comparing(MapModel::loadAt)
-//                        .reversed());
 
             } catch (IOException e) {
                 // Display error message
