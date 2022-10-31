@@ -136,10 +136,8 @@ If any uncaught exception occurs during the demonstration, you will get 0 for th
 
 ## Reference Implementation
 
-We provide a reference implementation of this assignment (it is obfuscated, and you won't see solutions in
-it) [here](https://course.cse.ust.hk/comp3021/assignments/Sokoban-proguard-PA2.jar).
-But JavaFX is not packed in the reference implementation JAR file.
-You need to download the JavaFX manually
+We provide a demonstration of reference implementation of this assignment.
+The demonstration video can be found on [YouTube](https://youtu.be/LiIyaaoaWxI).
 
 ### Download JavaFX
 
