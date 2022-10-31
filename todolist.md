@@ -55,6 +55,10 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Initial
     - [x] Both `Open Map` and `Delete Map` buttons are disabled
     - [x] No games are selected
+  - [x] Load map
+    - [x] Maps with more than 4 players should not be loaded, and should display an error message
+      - Handled in StartScene (verified by TAs in Discussion #116)
+      - `map13.map`, with 5 players and 10 boxes, should not be allowed
   - [x] MapList
     - [x] Sort by timestamp, either ascending or descending is fine
   - [x] MapListItem
@@ -71,12 +75,9 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] GameBoard
     - [x] Positions outside wall can have `null` value and no entity, and those boxes should not show green tick
     - [x] All rendering should be wrapped in `Platform.runLater()` to avoid Thread error
-  - [x] GameControls
-    - [x] If map has over 4 players, display error message when user tries to load a map with more than four players in the `StartScene` (verified by TAs in Discussion #116)
 
 ## Unresolved issues
 
-- [x] `map13.map` is created, with 5 players and 10 boxes, should not be allowed
 - [x] `MapModel::load`: Path to URL single slash problem (Windows-specific)
   - `MapModel::load` uses `Path.of(url.getPath())`
   - If we previously use `.toURI().toURL()` methods, the returned `URL` object begins with `file/C:/...` instead of `file///C:/...`
