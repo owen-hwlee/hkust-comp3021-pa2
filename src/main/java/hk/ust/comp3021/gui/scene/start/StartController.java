@@ -13,6 +13,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,16 +88,14 @@ public class StartController implements Initializable {
     @FXML
     private void onLoadMapBtnClicked(ActionEvent event) {
         // DONE
-        // Display file chooser
-        List<File> fileList = (new FileChooser()).showOpenMultipleDialog(null);
-        if (Objects.isNull(fileList)) {
+        // Display single file chooser
+        File mapFile = (new FileChooser()).showOpenDialog(null);
+        if (Objects.isNull(mapFile)) {
             return;
         }
 
-        // Validate and add maps to mapList
-        for (final File mapFile: fileList) {
-            addMapToMapList(mapFile);
-        }
+        // Validate and add map to mapList
+        addMapToMapList(mapFile);
 
         event.consume();
     }
@@ -170,7 +169,7 @@ public class StartController implements Initializable {
     // Helper function: validate and add map to mapList
     // Function argument is File type for single file reference
     // Used in initialize and after loadMap and dragDropped
-    private void addMapToMapList(final File mapFile) {
+    private void addMapToMapList(final @NotNull File mapFile) {
         try {
             // Validate map file extension
             if (!mapFile.getCanonicalPath().endsWith(".map")) {
