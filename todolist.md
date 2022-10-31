@@ -59,8 +59,9 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
     - [x] Maps with more than 4 players should not be loaded, and should display an error message
       - Handled in StartScene (verified by TAs in Discussion #116)
       - `map13.map`, with 5 players and 10 boxes, should not be allowed
+    - [x] `Load Map` button only need to support choosing single file (verified by TAs in Discussion #125)
   - [x] MapList
-    - [x] Sort by timestamp, either ascending or descending is fine
+    - [x] Sort by timestamp, either ascending or descending is fine (verified by TAs in Discussion #114)
   - [x] MapListItem
     - [x] Should display name, file path, load time properly in their respective `@FXML` components
   - [x] Set up event handlers in `App::start`
@@ -71,12 +72,12 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
       - Observable by the `Open Map` and `Delete Map` buttons being disabled
 - [x] Game stage
   - [x] Exiting game
-    - [x] What to do if user directly closes window instead of `Exit` button? Ans: anything, not specified in requirements
+    - [x] What to do if user directly closes window instead of `Exit` button? Ans: anything, not specified in requirements (verified by TAs in Discussion #115)
   - [x] GameBoard
     - [x] Positions outside wall can have `null` value and no entity, and those boxes should not show green tick
     - [x] All rendering should be wrapped in `Platform.runLater()` to avoid Thread error
 
-## Unresolved issues
+## Issue board
 
 - [x] `MapModel::load`: Path to URL single slash problem (Windows-specific)
   - `MapModel::load` uses `Path.of(url.getPath())`
