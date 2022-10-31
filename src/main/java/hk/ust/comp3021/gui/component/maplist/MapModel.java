@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public record MapModel(String name, Path file, Date loadAt, GameMap gameMap) {
      * @throws IOException When fails to access the file.
      */
     public static MapModel load(URL gameMapURL) throws IOException {
-        var gameMapFile = Path.of(gameMapURL.getPath());
+        var gameMapFile = Paths.get(gameMapURL.getPath());
         var reader = new BufferedReader(new InputStreamReader(gameMapURL.openStream()));
         var content = reader.lines().collect(Collectors.joining("\n"));
         var gameMap = GameMap.parse(content);
