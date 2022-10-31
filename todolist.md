@@ -83,7 +83,9 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - `MapModel::load` uses `Path.of(url.getPath())`
   - If we previously use `.toURI().toURL()` methods, the returned `URL` object begins with `file/C:/...` instead of `file///C:/...`
   - `URL::getPath()` then returns `/C:/...`, which is an invalid file path, resulting in parsing error
-  - [x] Solution: Use `new URL()` constructor and feed canonical path to ensure path uniqueness
+  - [x] Solutions:
+    - [x] Solution 1: Use `new URL()` constructor and feed canonical path to ensure path uniqueness
+    - [ ] Solution 2: Use `Paths.get` instead (TA fix)
 - [x] `MapListItemController`: `this.mapModelProperty` has `null` value during initialization
   - `MapListCell::updateItem` is called after `MapListItemController::initialize`
   - `this.mapModelProperty.value` had not been set, so has `null` value
@@ -98,7 +100,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - Likely originated from different caching location for `this.currentAction` used in while-loop condition and event handler
   - Preferrably NOT `Thread` related fix, since threading is not needed for this programming assignment
   - If possible, not use busy wait since it consumes CPU resources
-  - [x] Solution:
+  - [x] Solutions:
     - [x] Solution 1: use `volatile` keyword in busy wait
       - CheckStyle will issue an error for using an empty while-loop
     - [ ] Solution 2: use Lock classes provided by Java
