@@ -66,8 +66,8 @@ public class StartController implements Initializable {
                     StartController.class.getClassLoader().getResource("map01.map")
             ).toURI());
 
-            File[] builtInMapFiles = { map00, map01 };
-            addMapsToMapList(builtInMapFiles);
+            addMapToMapList(map00);
+            addMapToMapList(map01);
         } catch (URISyntaxException e) {
             e.printStackTrace();
             Message.error("Failed to load built-in maps.", "Built-in map files could not be loaded.");
@@ -92,10 +92,11 @@ public class StartController implements Initializable {
         if (Objects.isNull(fileList)) {
             return;
         }
-        File[] mapFiles = new File[fileList.size()];
-        fileList.toArray(mapFiles);
+
         // Validate and add maps to mapList
-        addMapsToMapList(mapFiles);
+        for (final File mapFile: fileList) {
+            addMapToMapList(mapFile);
+        }
 
         event.consume();
     }
@@ -107,7 +108,6 @@ public class StartController implements Initializable {
     @FXML
     public void onDeleteMapBtnClicked() {
         // DONE
-
         // Delete map from MapList
         this.mapList.getItems().remove(this.mapList.getFocusModel().getFocusedIndex());
 
@@ -157,66 +157,64 @@ public class StartController implements Initializable {
     @FXML
     public void onDragDropped(DragEvent dragEvent) {
         // DONE
-        // Obtain files from drag
-        File[] mapFiles = new File[dragEvent.getDragboard().getFiles().size()];
-        dragEvent.getDragboard().getFiles().toArray(mapFiles);
-
-        // Process map files
-        addMapsToMapList(mapFiles);
+        // Process map files obtained from drag
+        for (final File mapFile: dragEvent.getDragboard().getFiles()) {
+            addMapToMapList(mapFile);
+        }
 
         // Complete event
         dragEvent.setDropCompleted(true);
         dragEvent.consume();
     }
 
-    // Helper function: validate and add maps to mapList
-    // Assume function argument is array of File references
+    // Helper function: validate and add map to mapList
+    // Function argument is File type for single file reference
     // Used in initialize and after loadMap and dragDropped
-    private void addMapsToMapList(File[] mapFiles) {
-        for (final File mapFile: mapFiles) {
-            try {
-                // Validate map file extension
-                if (!mapFile.getCanonicalPath().endsWith(".map")) {
-                    Message.error("Imported map must be a .map file.", "Invalid file type: %s".formatted(mapFile));
-                    continue;
-                }
-                // Validate map file exists
-                if (!mapFile.getCanonicalFile().exists()) {
-                    Message.error("File not found at given map path.", "Map file at %s does not exist.".formatted(mapFile));
-                    continue;
-                }
-
-                // On duplicate absolute paths, override previous map and update load timestamp
-                // Here, perform "overriding" by deleting the map from memory and reloading
-                for (MapModel existingModel: this.mapList.getItems()) {
-                    if (existingModel.file().toAbsolutePath().equals(mapFile.toPath())) {
-                        this.mapList.getItems().remove(existingModel);
-                        break;
-                    }
-                }
-
-                // Load map from file
-                URL url = new URL("file", "", mapFile.getCanonicalPath());
-                MapModel mapModel = MapModel.load(url);
-
-                // Validate map should have at most 4 players
-                if (mapModel.gameMap().getPlayerIds().size() > 4) {
-                    Message.error("Invalid map.", "Map file contains more than 4 players. Invalid file: %s".formatted(mapFile));
-                    continue;
-                }
-
-                // Add maps to front of mapList
-                this.mapList.getItems().add(0, mapModel);
-
-            } catch (IOException e) {
-                // Display error message
-                e.printStackTrace();
-                Message.error("Failed to access .map file.", "Failed to load map at %s".formatted(mapFile));
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-                Message.error("Invalid map.", "Failed to parse map at %s".formatted(mapFile));
+    private void addMapToMapList(final File mapFile) {
+        try {
+            // Validate map file extension
+            if (!mapFile.getCanonicalPath().endsWith(".map")) {
+                Message.error("Imported map must be a .map file.", "Invalid file type: %s".formatted(mapFile));
+                return;
             }
+            // Validate map file exists
+            if (!mapFile.getCanonicalFile().exists()) {
+                Message.error("File not found at given map path.", "Map file at %s does not exist.".formatted(mapFile));
+                return;
+            }
+
+            // Load map from file
+            URL url = new URL("file", "", mapFile.getCanonicalPath());
+            MapModel mapModel = MapModel.load(url);
+
+            // Validate map should have at most 4 players
+            if (mapModel.gameMap().getPlayerIds().size() > 4) {
+                Message.error("Invalid map.", "Map file contains more than 4 players. Invalid file: %s".formatted(mapFile));
+                return;
+            }
+
+            // Make sure new map file is valid before overriding
+            // On duplicate absolute paths, override previous map and update load timestamp
+            // Here, perform "overriding" by deleting the map from memory and reloading
+            for (MapModel existingModel : this.mapList.getItems()) {
+                if (existingModel.file().toAbsolutePath().equals(mapFile.toPath())) {
+                    this.mapList.getItems().remove(existingModel);
+                    break;
+                }
+            }
+
+            // Add maps to front of mapList
+            this.mapList.getItems().add(0, mapModel);
+
+        } catch (IOException e) {
+            // Display error message
+            e.printStackTrace();
+            Message.error("Failed to access .map file.", "Failed to load map at %s".formatted(mapFile));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            Message.error("Invalid map.", "Failed to parse map at %s".formatted(mapFile));
         }
+
     }
 
 }
