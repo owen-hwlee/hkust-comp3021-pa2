@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -25,7 +25,8 @@ public class ControlPanelController implements Initializable, InputEngine {
     @FXML
     private FlowPane playerControls;
 
-    private volatile Action currentAction;
+    // FIFO Queue to cache Actions
+    static volatile ArrayList<Action> actionCache;
 
     /**
      * Fetch the next action made by users.
@@ -42,13 +43,11 @@ public class ControlPanelController implements Initializable, InputEngine {
         // FIXME: several concurrency issues
         //  Find method to do wait better than busy wait: temporarily solved by volatile keyword
         //  While-loop does not terminate even after GameScene ends: see Discussion #113
-        while (Objects.isNull(this.currentAction)) {
+        while (actionCache.isEmpty()) {
         }
 
-        // Provide Action for game to process and clear cached Action
-        Action action = this.currentAction;
-        this.currentAction = null;
-        return action;
+        // Provide Action for game to process and clear most recently cached Action
+        return actionCache.remove(0);
     }
 
     /**
@@ -62,11 +61,7 @@ public class ControlPanelController implements Initializable, InputEngine {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // DONE
-        // Add event handler for MoveEvent
-        this.playerControls.addEventHandler(MoveEvent.PLAYER_MOVE_EVENT_TYPE, (moveEvent -> {
-            this.currentAction = moveEvent.getMove();
-            moveEvent.consume();
-        }));
+        actionCache = new ArrayList<>();
     }
 
     /**
@@ -78,7 +73,7 @@ public class ControlPanelController implements Initializable, InputEngine {
     public void onUndo(ActionEvent event) {
         // DONE
 
-        this.currentAction = new Undo(-1);
+        actionCache.add(new Undo(-1));
 
         event.consume();
     }

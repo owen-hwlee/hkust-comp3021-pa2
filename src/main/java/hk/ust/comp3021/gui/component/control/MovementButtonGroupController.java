@@ -45,33 +45,25 @@ public class MovementButtonGroupController implements Initializable {
     @FXML
     private void moveUp() {
         // DONE
-        this.playerControl.fireEvent(
-                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Up(this.player.getId()))
-        );
+        ControlPanelController.actionCache.add(new Move.Up(this.player.getId()));
     }
 
     @FXML
     private void moveDown() {
         // DONE
-        this.playerControl.fireEvent(
-                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Down(this.player.getId()))
-        );
+        ControlPanelController.actionCache.add(new Move.Down(this.player.getId()));
     }
 
     @FXML
     private void moveLeft() {
         // DONE
-        this.playerControl.fireEvent(
-                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Left(this.player.getId()))
-        );
+        ControlPanelController.actionCache.add(new Move.Left(this.player.getId()));
     }
 
     @FXML
     private void moveRight() {
         // DONE
-        this.playerControl.fireEvent(
-                new MoveEvent(MoveEvent.PLAYER_MOVE_EVENT_TYPE, new Move.Right(this.player.getId()))
-        );
+        ControlPanelController.actionCache.add(new Move.Right(this.player.getId()));
     }
 
     @Override
