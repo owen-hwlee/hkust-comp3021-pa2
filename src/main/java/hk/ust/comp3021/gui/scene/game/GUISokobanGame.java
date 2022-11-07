@@ -41,7 +41,9 @@ public class GUISokobanGame extends AbstractSokobanGame implements Runnable {
             renderingEngine.render(state);
         }
         // DONE: Display the win message.
-        Platform.runLater(() -> Message.info(WIN_MESSAGE, "Congratulations, you have won the game!"));
+        if (state.isWin()) {
+            Platform.runLater(() -> Message.info(WIN_MESSAGE, "Congratulations, you have won the game!"));
+        }
     }
 
 }
