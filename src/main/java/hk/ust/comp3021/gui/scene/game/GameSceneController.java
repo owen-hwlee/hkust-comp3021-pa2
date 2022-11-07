@@ -1,8 +1,10 @@
 package hk.ust.comp3021.gui.scene.game;
 
+import hk.ust.comp3021.actions.Exit;
 import hk.ust.comp3021.game.GameState;
 import hk.ust.comp3021.gui.component.board.GameBoard;
 import hk.ust.comp3021.gui.component.control.ControlPanel;
+import hk.ust.comp3021.gui.component.control.ControlPanelController;
 import hk.ust.comp3021.gui.utils.Resource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,6 +67,7 @@ public class GameSceneController implements Initializable {
     @FXML
     public void onExit(ActionEvent event) {
         // DONE
+        ControlPanelController.actionCache.add(new Exit(-1));
         this.gamePane.fireEvent(new ExitEvent());
         event.consume();
     }

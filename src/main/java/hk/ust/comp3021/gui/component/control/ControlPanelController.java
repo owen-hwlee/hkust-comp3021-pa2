@@ -26,7 +26,7 @@ public class ControlPanelController implements Initializable, InputEngine {
     private FlowPane playerControls;
 
     // FIFO Queue to cache Actions
-    static volatile ArrayList<Action> actionCache;
+    public static volatile ArrayList<Action> actionCache;
 
     /**
      * Fetch the next action made by users.
