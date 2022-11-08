@@ -192,6 +192,12 @@ public class StartController implements Initializable {
                 return;
             }
 
+            // Validate map should only have players A, B, C, D
+            if (!Set.of(0, 1, 2, 3).containsAll(mapModel.gameMap().getPlayerIds())) {
+                Message.error("Invalid map.", "Map file contains players that are not A, B, C, D. Invalid file: %s".formatted(mapFile));
+                return;
+            }
+
             // Make sure new map file is valid before overriding
             // On duplicate absolute paths, override previous map and update load timestamp
             // Here, perform "overriding" by deleting the map from memory and reloading
