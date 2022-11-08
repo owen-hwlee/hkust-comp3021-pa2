@@ -55,6 +55,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - [x] Initial
     - [x] Both `Open Map` and `Delete Map` buttons are disabled
     - [x] No games are selected
+    - [x] No need to support loading default map files other than `map00.map` and `map01.map` (verified by TAs in Discussion #154)
   - [x] Load map
     - [x] Maps with more than 4 players should not be loaded, and should display an error message
       - Handled in StartScene (verified by TAs in Discussion #116)
