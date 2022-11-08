@@ -59,9 +59,9 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
     - [x] Maps with more than 4 players should not be loaded, and should display an error message
       - Handled in StartScene (verified by TAs in Discussion #116)
       - `map13.map`, with 5 players and 10 boxes, should not be allowed
-    - [ ] Maps with players that are not in `{A, B, C, D}` should ??? (TBC)
-      - Handled in ??? (TBC) (verified by TAs in Discussion #116)
-      - `map14.map`, with players `{H, I, J, K}`, should ??? (TBC)
+    - [x] Maps with players that are not in `{A, B, C, D}` should be disallowed
+      - Handled in StartScene, similar to checking for 4 players (verified by TAs in Discussion #116)
+      - `map14.map`, with players `{H, I, J, K}`, should not be allowed
     - [x] `Load Map` button only need to support choosing single file (verified by TAs in Discussion #125)
   - [x] MapList
     - [x] Sort by timestamp, either ascending or descending is fine (verified by TAs in Discussion #114)
