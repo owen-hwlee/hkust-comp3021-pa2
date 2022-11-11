@@ -64,6 +64,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
       - Handled in StartScene, similar to checking for 4 players (verified by TAs in Discussion #116)
       - `map14.map`, with players `{H, I, J, K}`, should not be allowed
     - [x] `Load Map` button only need to support choosing single file (verified by TAs in Discussion #125)
+    - [x] Loading an invalid map should not modify anything in the existing `MapList` (verified by TAs in Discussion #161)
   - [x] MapList
     - [x] Sort by timestamp, either ascending or descending is fine (verified by TAs in Discussion #114)
   - [x] MapListItem
@@ -100,7 +101,7 @@ Dragging files to the start scene should work the same as clicking `Load Map` bu
   - `this.mapModelProperty.value` had not been set, so has `null` value
   - [x] Solutions:
     - [x] Solution 1: add `StringBinding` to `textProperty` of `@FXML` Labels (suggested by TAs in Discussion #145)
-    - [ ] Solution 2: do `this.mapModelProperty.addListener` and pass a lambda setting text of `@FXML` Labels
+    - [ ] Solution 2: do `this.mapModelProperty.addListener` and pass a lambda setting text of `@FXML` Labels (suggested by TAs in Discussions #157 #174)
 - [x] `GameBoardController::render`: performing `this.map.add()` repeatedly to add all `Cell()`s will result in Threading issue, causing `Not on FX Application Thread` error
   - [x] Solution: use `Platform.runLater()` to wrap the `.add(Cell)` operation
 - [x] `CheckStyle` returns style error with `MapEvent.OPEN_MAP_EVENT_TYPE`
